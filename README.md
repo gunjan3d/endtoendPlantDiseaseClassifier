@@ -1,70 +1,136 @@
-# Getting Started with Create React App
+# 🌿 Plant Disease Classifier 🌿
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web-based Plant Disease Classification system that uses a **FastAPI backend** for image inference, a **React frontend** for user interaction, and is fully containerized using **Docker**.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+- Upload plant leaf images to predict diseases.
+- FastAPI handles model inference and API endpoints.
+- React provides an intuitive UI.
+- Docker ensures consistent deployment across environments.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🧱 Project Structure
 
-### `npm test`
+plant-disease-classifier/
+│
+├── backend/ # FastAPI backend
+│ ├── main.py
+│ ├── model/ # Saved ML model (TensorFlow/Keras)
+│ ├── requirements.txt
+│ └── Dockerfile
+│
+├── frontend/ # React frontend
+│ ├── public/
+│ ├── src/
+│ ├── Dockerfile
+│ └── package.json
+│
+├── docker-compose.yml
+└── README.md
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+yaml
+Copy
+Edit
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ⚙️ Requirements
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Docker & Docker Compose
+- (Optional) Python 3.9+ & Node.js 16+ if running outside containers
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🐳 Running the App with Docker (Recommended)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 1. Clone the Repository
+git clone https://github.com/&&&&&&&&/plant-disease-classifier.git
+cd plant-disease-classifier
+2. Build and Run Containers
+bash
+Copy
+Edit
+docker-compose up --build
+This will:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Build the FastAPI backend on port 8000
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Build the React frontend on port 3000
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Connect both containers via Docker Compose
 
-## Learn More
+3. Open in Browser
+Visit: http://localhost:3000
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+🧪 Backend (FastAPI)
+If you want to run it without Docker:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Setup
+bash
+Copy
+Edit
+cd backend
+python -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+pip install -r requirements.txt
+Run FastAPI
+bash
+Copy
+Edit
+uvicorn main:app --host 0.0.0.0 --port 8000
+API Endpoints
+POST /predict: Accepts image file and returns disease prediction
 
-### Code Splitting
+🌐 Frontend (React)
+If you want to run it without Docker:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Setup
+bash
+Copy
+Edit
+cd frontend
+npm install
+Run Development Server
+bash
+Copy
+Edit
+npm start
+Make sure the backend is running on port 8000.
 
-### Analyzing the Bundle Size
+🛠️ Configuration
+Update the API base URL in the React frontend if you're not using Docker Compose:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+js
+Copy
+Edit
+// src/api.py or wherever the endpoint is defined
+const API_URL = "http://localhost:8000";
+📦 Deployment Tips
+For production, consider:
 
-### Making a Progressive Web App
+Nginx reverse proxy
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Using Docker volumes for static builds
 
-### Advanced Configuration
+HTTPS setup (Let’s Encrypt)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+📸 Example Prediction
+Upload: tomato_leaf.jpg
 
-### Deployment
+Output:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+json
+Copy
+Edit
+{
+  "prediction": "Tomato___Late_blight",
+  "confidence": 0.97
+}
+👨‍💻 Author
+Gunjan Sarode
+LinkedIn • Analyst Trainee at KPMG
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
